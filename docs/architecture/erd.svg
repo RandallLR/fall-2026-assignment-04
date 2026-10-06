@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350 920" width="100%" height="100%" style="background-color: #0f172a; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="crow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+    </marker>
+    <marker id="one" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 5 0 L 5 10" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+    </marker>
+  </defs>
+
+  <style>
+    .entity-box { fill: #1e293b; stroke: #334155; stroke-width: 1.5; rx: 8px; filter: url(#shadow); }
+    .header-box { fill: #334155; rx: 8px 8px 0 0; }
+    .header-text { fill: #f8fafc; font-size: 14px; font-weight: 700; text-anchor: middle; letter-spacing: 0.05em; }
+    .row-bg-even { fill: #1e293b; }
+    .row-bg-odd { fill: #0f172a; opacity: 0.3; }
+    .col-pk { fill: #38bdf8; font-size: 11px; font-weight: 700; font-family: monospace; }
+    .col-fk { fill: #fbbf24; font-size: 11px; font-weight: 700; font-family: monospace; }
+    .col-type { fill: #94a3b8; font-size: 12px; font-family: monospace; }
+    .col-name { fill: #e2e8f0; font-size: 12px; font-family: monospace; }
+    .relation-line { stroke: #64748b; stroke-width: 1.5; fill: none; stroke-dasharray: 4,4; }
+    .relation-solid { stroke: #94a3b8; stroke-width: 1.5; fill: none; }
+    .label { fill: #94a3b8; font-size: 11px; font-weight: 500; }
+  </style>
+
+  <!-- Title -->
+  <text x="675" y="40" fill="#f8fafc" font-size="20" font-weight="700" text-anchor="middle">Library Management System — Entity Relationship Diagram</text>
+
+  <!-- Relationships Lines -->
+  <!-- USERS to BORROWERS -->
+  <path d="M 290 150 L 370 150" class="relation-solid" marker-start="url(#one)" marker-end="url(#one)" />
+  <text x="330" y="142" class="label" text-anchor="middle">has (1:1)</text>
+
+  <!-- BORROWERS to LOANS -->
+  <path d="M 610 160 L 690 160" class="relation-solid" marker-start="url(#one)" marker-end="url(#crow)" />
+  <text x="650" y="152" class="label" text-anchor="middle">takes</text>
+
+  <!-- BOOKS to BOOK_COPIES -->
+  <path d="M 930 430 L 1010 430" class="relation-solid" marker-start="url(#one)" marker-end="url(#crow)" />
+  <text x="970" y="422" class="label" text-anchor="middle">has</text>
+
+  <!-- BOOK_COPIES to LOANS -->
+  <path d="M 1120 340 L 1120 180 L 930 180" class="relation-solid" marker-start="url(#one)" marker-end="url(#crow)" />
+  <text x="1135" y="250" class="label">loaned_in</text>
+
+  <!-- AUTHORS to BOOK_AUTHORS -->
+  <path d="M 290 430 L 370 430" class="relation-solid" marker-start="url(#one)" marker-end="url(#crow)" />
+  <text x="330" y="422" class="label" text-anchor="middle">writes</text>
+
+  <!-- BOOKS to BOOK_AUTHORS -->
+  <path d="M 690 430 L 610 430" class="relation-solid" marker-start="url(#one)" marker-end="url(#crow)" />
+  <text x="650" y="422" class="label" text-anchor="middle">has</text>
+
+  <!-- GENRES to BOOK_GENRES -->
+  <path d="M 290 700 L 370 700" class="relation-solid" marker-start="url(#one)" marker-end="url(#crow)" />
+  <text x="330" y="692" class="label" text-anchor="middle">categorizes</text>
+
+  <!-- BOOKS to BOOK_GENRES -->
+  <path d="M 810 540 L 810 700 L 610 700" class="relation-solid" marker-start="url(#one)" marker-end="url(#crow)" />
+  <text x="760" y="692" class="label" text-anchor="middle">has</text>
+
+
+  <!-- USERS Table -->
+  <g transform="translate(50, 70)">
+    <rect width="240" height="155" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">USERS (existing)</text>
+    <rect x="0" y="32" width="240" height="28" class="row-bg-odd" />
+    <text x="12" y="51" class="col-pk">PK</text><text x="40" y="51" class="col-name">id</text><text x="160" y="51" class="col-type">int</text>
+    <text x="12" y="79" class="col-fk">UK</text><text x="40" y="79" class="col-name">email</text><text x="160" y="79" class="col-type">string</text>
+    <rect x="0" y="88" width="240" height="28" class="row-bg-odd" />
+    <text x="40" y="107" class="col-name">name</text><text x="160" y="107" class="col-type">string</text>
+    <text x="40" y="135" class="col-name">created_at</text><text x="160" y="135" class="col-type">timestamp</text>
+  </g>
+
+  <!-- BORROWERS Table -->
+  <g transform="translate(370, 70)">
+    <rect width="240" height="215" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">BORROWERS</text>
+    <rect x="0" y="32" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="50" class="col-pk">PK</text><text x="40" y="50" class="col-name">id</text><text x="160" y="50" class="col-type">int</text>
+    <text x="12" y="76" class="col-fk">FK</text><text x="40" y="76" class="col-name">user_id</text><text x="160" y="76" class="col-type">int</text>
+    <rect x="0" y="84" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="102" class="col-fk">UK</text><text x="40" y="102" class="col-name">card_number</text><text x="160" y="102" class="col-type">string</text>
+    <text x="40" y="128" class="col-name">phone</text><text x="160" y="128" class="col-type">string</text>
+    <rect x="0" y="136" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="154" class="col-name">address</text><text x="160" y="154" class="col-type">string</text>
+    <text x="40" y="180" class="col-name">status</text><text x="160" y="180" class="col-type">string</text>
+    <rect x="0" y="188" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="206" class="col-name">membership_exp</text><text x="160" y="206" class="col-type">date</text>
+  </g>
+
+  <!-- LOANS Table -->
+  <g transform="translate(690, 70)">
+    <rect width="240" height="240" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">LOANS</text>
+    <rect x="0" y="32" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="50" class="col-pk">PK</text><text x="40" y="50" class="col-name">id</text><text x="160" y="50" class="col-type">int</text>
+    <text x="12" y="76" class="col-fk">FK</text><text x="40" y="76" class="col-name">borrower_id</text><text x="160" y="76" class="col-type">int</text>
+    <rect x="0" y="84" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="102" class="col-fk">FK</text><text x="40" y="102" class="col-name">copy_id</text><text x="160" y="102" class="col-type">int</text>
+    <text x="40" y="128" class="col-name">loan_date</text><text x="160" y="128" class="col-type">timestamp</text>
+    <rect x="0" y="136" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="154" class="col-name">due_date</text><text x="160" y="154" class="col-type">date</text>
+    <text x="40" y="180" class="col-name">return_date</text><text x="160" y="180" class="col-type">timestamp</text>
+    <rect x="0" y="188" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="206" class="col-name">status</text><text x="160" y="206" class="col-type">string</text>
+    <text x="40" y="230" class="col-name">fine_amount</text><text x="160" y="230" class="col-type">decimal</text>
+  </g>
+
+  <!-- AUTHORS Table -->
+  <g transform="translate(50, 340)">
+    <rect width="240" height="135" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">AUTHORS</text>
+    <rect x="0" y="32" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="50" class="col-pk">PK</text><text x="40" y="50" class="col-name">id</text><text x="160" y="50" class="col-type">int</text>
+    <text x="40" y="76" class="col-name">name</text><text x="160" y="76" class="col-type">string</text>
+    <rect x="0" y="84" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="102" class="col-name">bio</text><text x="160" y="102" class="col-type">text</text>
+  </g>
+
+  <!-- BOOK_AUTHORS Table -->
+  <g transform="translate(370, 340)">
+    <rect width="240" height="155" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">BOOK_AUTHORS</text>
+    <rect x="0" y="32" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="50" class="col-pk">PK</text><text x="40" y="50" class="col-name">id</text><text x="160" y="50" class="col-type">int</text>
+    <text x="12" y="76" class="col-fk">FK</text><text x="40" y="76" class="col-name">book_id</text><text x="160" y="76" class="col-type">int</text>
+    <rect x="0" y="84" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="102" class="col-fk">FK</text><text x="40" y="102" class="col-name">author_id</text><text x="160" y="102" class="col-type">int</text>
+    <text x="40" y="128" class="col-name">role</text><text x="160" y="128" class="col-type">string</text>
+  </g>
+
+  <!-- BOOKS Table -->
+  <g transform="translate(690, 340)">
+    <rect width="240" height="200" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">BOOKS</text>
+    <rect x="0" y="32" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="50" class="col-pk">PK</text><text x="40" y="50" class="col-name">id</text><text x="160" y="50" class="col-type">int</text>
+    <text x="12" y="76" class="col-fk">UK</text><text x="40" y="76" class="col-name">isbn</text><text x="160" y="76" class="col-type">string</text>
+    <rect x="0" y="84" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="102" class="col-name">title</text><text x="160" y="102" class="col-type">string</text>
+    <text x="40" y="128" class="col-name">pub_year</text><text x="160" y="128" class="col-type">int</text>
+    <rect x="0" y="136" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="154" class="col-name">publisher</text><text x="160" y="154" class="col-type">string</text>
+    <text x="40" y="180" class="col-name">summary</text><text x="160" y="180" class="col-type">text</text>
+  </g>
+
+  <!-- BOOK_COPIES Table -->
+  <g transform="translate(1010, 340)">
+    <rect width="240" height="175" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">BOOK_COPIES</text>
+    <rect x="0" y="32" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="50" class="col-pk">PK</text><text x="40" y="50" class="col-name">id</text><text x="160" y="50" class="col-type">int</text>
+    <text x="12" y="76" class="col-fk">FK</text><text x="40" y="76" class="col-name">book_id</text><text x="160" y="76" class="col-type">int</text>
+    <rect x="0" y="84" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="102" class="col-fk">UK</text><text x="40" y="102" class="col-name">barcode</text><text x="160" y="102" class="col-type">string</text>
+    <text x="40" y="128" class="col-name">status</text><text x="160" y="128" class="col-type">string</text>
+    <rect x="0" y="136" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="154" class="col-name">condition</text><text x="160" y="154" class="col-type">string</text>
+  </g>
+
+  <!-- GENRES Table -->
+  <g transform="translate(50, 620)">
+    <rect width="240" height="135" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">GENRES</text>
+    <rect x="0" y="32" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="50" class="col-pk">PK</text><text x="40" y="50" class="col-name">id</text><text x="160" y="50" class="col-type">int</text>
+    <text x="12" y="76" class="col-fk">UK</text><text x="40" y="76" class="col-name">name</text><text x="160" y="76" class="col-type">string</text>
+    <rect x="0" y="84" width="240" height="26" class="row-bg-odd" />
+    <text x="40" y="102" class="col-name">description</text><text x="160" y="102" class="col-type">text</text>
+  </g>
+
+  <!-- BOOK_GENRES Table -->
+  <g transform="translate(370, 620)">
+    <rect width="240" height="135" class="entity-box" />
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-box" />
+    <text x="120" y="21" class="header-text">BOOK_GENRES</text>
+    <rect x="0" y="32" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="50" class="col-pk">PK</text><text x="40" y="50" class="col-name">id</text><text x="160" y="50" class="col-type">int</text>
+    <text x="12" y="76" class="col-fk">FK</text><text x="40" y="76" class="col-name">book_id</text><text x="160" y="76" class="col-type">int</text>
+    <rect x="0" y="84" width="240" height="26" class="row-bg-odd" />
+    <text x="12" y="102" class="col-fk">FK</text><text x="40" y="102" class="col-name">genre_id</text><text x="160" y="102" class="col-type">int</text>
+  </g>
+
+</svg>
